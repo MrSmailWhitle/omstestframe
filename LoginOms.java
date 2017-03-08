@@ -114,6 +114,7 @@ public class LoginOms{
 		this.contractid=browser.findElement(By.id("txt_ContractNo")).getAttribute("value");
 		this.print("生成编号成功，切为："+this.contractid);
 		
+		
 		//选择签约方
 		Select qy=new Select(browser.findElement(By.name("ContractParty")));
 		qy.selectByValue("2");
@@ -147,14 +148,20 @@ public class LoginOms{
 		WebElement item=browser.findElement(By.xpath("//*[@id='div_LabourContractSet']/table/tbody/tr[1]/td[1]/b"));
 		assert item.getText()=="FS1合同A版本数据项";
 		this.print("发现FS1合同A版本数据项编辑数据，测试第一步通过");
-		browser.close();
+		
 	}
 	public void saveContract(){
-		WebElement btmsave=browser.findElement(By.id("txt_ContractNo"));
+		WebElement btmsave=browser.findElement(By.id("btn_Submit"));
 		btmsave.click();
 		
 		
 		this.print("保存成功，请确定");
+		Alert massange=browser.switchTo().alert();
+		assert massange.getText().contains("请填写所有数据"):"提示有误,请修改备注提示信息";
+		this.print("提示信息ok；");
+		massange.accept();
+		this.print("关闭alert成功；");
+		browser.close();
 	}
 	
 	
@@ -173,5 +180,6 @@ public class LoginOms{
 		oms.contractTime();
 		oms.Reamark();
 		oms.testDataitem();
+		oms.saveContract();
 	}
 }
