@@ -8,47 +8,15 @@ import org.openqa.selenium.support.ui.Select;
 
 import LoginScript.modules.ModulesHome;
 
-public class CustomContract extends ModulesHome {
+public class CustomContract extends SelectCustomListItem 
+implements switch_ContractSign,
+	switch_ContractLimits,
+	switch_ContractType,
+	switch_Add_ContractNo_orNot,
+	switch_selectVerContract{
 	private String contractid=null;
-	public void switchWinAndSelectCustom(){
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("frm_Content")));
-		WebElement iframe=browser.findElement(By.tagName("iframe"));
-		//browser.switchTo();
-		browser.switchTo().frame(iframe);
-		
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='129271']/td[3]/a")));
-		browser.findElement(By.xpath("//*[@id='129271']/td[3]/a")).click();
-		System.out.println("[+......]选择客户成功");
-		
-	}
-	public void switch_CustomContractWindow(){
-		//wait.until(ExpectedConditions.presenceOfElementLocated(By.id("frm_Content")));
-		
-		//回到主窗口
-		browser.switchTo().defaultContent();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div[4]/ul/li[3]")));
-		browser.findElement(By.xpath("/html/body/div[1]/div[1]/div[4]/ul/li[3]")).click();
-		System.out.println("[+......]切换客户基本信息");
-		//browser.close();
-	}
-	public void add_CustomContract(){
-		browser.switchTo().frame("frm_Content_01");
-		//等待切换至业务合同界面
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("body_content")));
-		browser.findElement(By.className("btn_data_add")).click();
-		//browser.switchTo().defaultContent();
-		System.out.println("[+......]readey add 客户合同");
-		
-	}
+	//添加业务合同
 	//start：开始进行业务合同的添加编辑；
-	public void editCustomContractStart(){
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("div_dialog_close")));
-		//browser.switchTo().frame("frm_Content_01");
-		WebElement iframe=browser.findElement(By.tagName("iframe"));
-		//browser.switchTo();
-		browser.switchTo().frame(iframe);
-	}
-	
 	//1。是否二次开发
 	//当前默认非二次开发；若是，label1.否：label2；
 	public void com_SencondDev(){
@@ -122,29 +90,6 @@ public class CustomContract extends ModulesHome {
 		remark.sendKeys("Test测试，outpou 啊！");
 	}
 	
-	//FS1数据项校验；
-	public void testDataitem(){
-		WebElement item=browser.findElement(By.xpath("//*[@id='div_LabourContractSet']/table/tbody/tr[1]/td[1]/b"));
-		assert item.getText()=="FS1合同A版本数据项";
-		this.print("发现FS1合同A版本数据项编辑数据，测试第一步通过");
-		
-	}
-	//保存数据项
-	public void saveContract(){
-		WebElement btmsave=browser.findElement(By.id("btn_Submit"));
-		btmsave.click();
-		
-		
-		this.print("保存后请依据提示操作");
-	}	
-		
-	public void noWhole(){
-		Alert massange=browser.switchTo().alert();
-		assert massange.getText().contains("请填写所有数据"):"提示有误,请修改备注提示信息";
-		this.print("提示信息ok；");
-		massange.accept();
-		this.print("关闭alert成功；");
-		browser.close();
-	}
+
 
 }

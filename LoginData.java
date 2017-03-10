@@ -5,12 +5,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.apache.log4j.Logger;
+
 public interface LoginData {
 	public static final String name="李菁";
 	public static void testOracle(){
 	}
 }
 class Data implements LoginData{
+	//private static Logger logger=Logger.getLogger(LoginData.class);
 	//重写接口获取登录名登录密码接口方法
 	public  String[] testOracle(String name){
 		Connection con=null;//创建一个数据库连接

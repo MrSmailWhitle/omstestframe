@@ -2,18 +2,21 @@ package LoginScript;
 
 import java.sql.DriverManager;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.apache.commons.lang3.time.StopWatch;
 import Interface.extend.ExtendInterfacesClass;
 import Login.LoginDataGet;
 
 
 public class LoginOms{
-	public static String url="**********************************";
+	private static Logger logger=Logger.getLogger(LoginOms.class);
+	
+	public static String url="http://whwdev03.ciic.com:8018/verification/index?ReturnUrl=%2f";
 	public String username=null;
 	public String pwd=null;
 	protected WebDriver browser=new InternetExplorerDriver();
@@ -48,4 +51,11 @@ public class LoginOms{
 		System.out.println("[+......]µÇÂ¼³É¹¦");
 		
 		}
+	public static void main(String[] args){
+		LoginOms loginer=new LoginOms();
+		loginer.getIn();
+		
+		
+		
+	}
 }
